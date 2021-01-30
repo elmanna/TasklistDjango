@@ -1,0 +1,23 @@
+{% load static %}
+<title>Taskmate</title>
+  <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+  <link rel="icon" href="{% static 'img/ico.ico' %}">
+  <script src="{% static 'js/materialize.min.js' %}"></script>
+  <nav class="nav-wrapper">
+    <div class="container">
+      <ul>
+        <a href="/" class="brand-logo center"><img src="{% static 'img/logo.png' %}" alt="logo" height="60px" width="60px"></a>
+      <!-- <ul id="nav" class="left hide-on-med-and-down">
+        <li><a href="index.php"><b>Home</b></a></li>
+      </ul> -->
+       {% if user.is_authenticated %}
+        <text class="right" style="margin-right : 20px;">
+          <a href="{% url 'logout' %}"><b>Logout</b></a>
+        </text>
+        <text class="left" style="margin-left : 20px;">
+         <b>{{user.username}}</b>
+        </text>
+        {% endif %}
+    </div>
+    </ul>
+  </nav>
