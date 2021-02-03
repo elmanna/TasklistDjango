@@ -1,0 +1,10 @@
+<div class="card offset-s3 col s9 z-depth-3" style="margin-top: 10%">
+        <div class="row">
+                <form method="POST" class="offset-s2 col s8">
+                    {% csrf_token %}
+                    <input class="input-field col  s12"  style="margin-top: 15px" type="text" id="task" name="task" placeholder="update task.." value="{{task}}">
+                    <button class="col offset-s s12 btn" type="submit" style="margin-bottom: 10px; background-color: #ffc107;" 
+                        name="update">Update</button>
+                </form>
+            </div>
+</div> 
