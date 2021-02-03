@@ -1,0 +1,62 @@
+{% load static %}
+
+ <div class="container">
+    <div class="row">
+        <div class="card offset-s col s12 z-depth-5" style="margin-top: 10px;">
+            <form method="POST">
+                {% csrf_token %}
+                    <input class="col offset-s2 s10" style="padding: 5px; margin: 20px;" type="text" id="task" name="task" placeholder="a new task">
+                    <button class="col offset-s4 s11 btn-large materialize-red" type="submit"
+                    style="margin: 10px; margin-left: 12px;"><img src="{% static 'img/plus.png' %}"/></button>
+            </form>
+        </div>
+    </div> 
+
+<div class="container">
+    <div class="row">
+        <div class="card col s12 z-depth-4" style="margin: 0px;">
+            <form method="post">
+                {% csrf_token %}            
+                <table class=" highlight">
+                    <center><label><h4>Tasks</h4></label></center>
+                    <!-- <div class="row"> -->
+                    <!-- </div> -->
+                    <thead>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {% for task in user_tasks %}
+                            {% if task.done %}
+                                <tr class="row" style='background-color: #dff0d8; boarder-color: #d0e9c6;'>
+                                    <td class="col s12"><p style="text-align: center;">{{task.task}}</p><br/></td> 
+                                </tr>
+                                <tr>
+                                    <td class="row centered">
+                                        <a class="btn orange col s3"  href="{% url 'set_task' task.id %}"><i class="material-icons">remove</i></a>
+                                        <a class="col s1"></a>
+                                        <a class="btn col s4" style='background-color: #ffc107;' href="{% url 'update_task' task.id %}"><i class="material-icons">edit</i></a>
+                                        <a class="col s1"></a>
+                                        <a class="btn red col s3" href="{% url 'delete_task' task.id %}"><i class="material-icons">delete</i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr class="row" style='background-color: #f2dede; boarder-color: #ebcccc;'>
+                                    <td class="col s12"><p style="text-align: center;">{{task.task}}</p><br/></td> 
+                                </tr>
+                                <tr>
+                                    <td class="row centered">
+                                        <a class="btn green col s3"  href="{% url 'set_task' task.id %}"><i class="material-icons">check</i></a>
+                                        <a class="col s1"></a>
+                                        <a class="btn col s4" style='background-color: #ffc107;' href="{% url 'update_task' task.id %}"><i class="material-icons">edit</i></a>
+                                        <a class="col s1"></a>
+                                        <a class="btn red col s3" href="{% url 'delete_task' task.id %}"><i class="material-icons">delete</i></a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+<div>

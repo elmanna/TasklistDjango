@@ -3,35 +3,20 @@
 {% block content %}
     <body>
         <main>
-            <div class="row" style="position: fixed; height: 85%; width: 100%; bottom: 0%;">
-                <div class="card col offset-s4 s4 z-depth-5" style="padding: 25px; border-radius: 20px;top: 50px;">
-                    <center><h4 style="color: #0d4a6b; letter-spacing: .5px; transition: .2s ease-out;">Signup</h4></center>
-                    <form name="signup" method="POST">
-                        {% csrf_token %}
-                        <input class="col s12" type="text" name="username" placeholder="Username" value="">
-                        <input type="text" class="col s12" name="email" placeholder="Email" value="" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                        <input class="col s12" type="password" name="password" placeholder="Password"  required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
-                        <label for="password"> Password Must Contain UpperCase, Number, SpecialChar and at least 8 Chars</label>
-                        <input class="col s12" type="password" name="password2" placeholder="Confirm Password"><p id="check" style="color: red;"></p>
-                        <input class="btn col s12" style="background-color:  #0d4a6b;" type="submit" onclick="return check();" id="signup" name="signup" value="Signup">
-                        <script type="text/javascript" language="JavaScript">
-                            function check() {
-                            var p1 = document.signup.password.value;
-                            var p2 = document.signup.password2.value;
-                                if(p1 == p2)
-                                {
-                                    return true;
-                                }else{
-                                    text = document.getElementById("check");
-                                    text.innerText = "passwords must match!";
-                                    return false;
-                                }
-                            }
-                        </script>
-                            
-                            
-                    </form>
-                </div>
+            <div class="container">
+                {% if  user_agent.is_mobile %}
+                    {% if not user_agent.is_tablet %}
+                        {% include 'signup/mobile.html' %}
+                    {% else %}
+                        {% include 'signup/tablet.html' %}
+                    {% endif %}
+                {% else %}
+                    {% if not user_agent.is_pc %}
+                        {% include 'signup/tablet.html' %}
+                    {% else %}
+                        {% include 'signup/pc.html' %}
+                    {% endif %}
+                {% endif %}
             </div>
         </main>
     </body>

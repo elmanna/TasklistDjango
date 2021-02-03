@@ -1,0 +1,12 @@
+<div class="row" style="position: fixed; height: 75%; width: 100%; bottom: 0%;">
+    <div class="card col offset-s2 s5 z-depth-5" style="padding: 2%; border-radius: 20px;">
+            <center><h4 style="color: #0d4a6b; letter-spacing: .5px; transition: .2s ease-out;">LOGIN</h4></center>
+            <form method="POST">
+                {% csrf_token %}
+                <input class="col s12" type="text" name="username" placeholder="Username">
+                <input class="col s12" type="password" name="passwd" placeholder="Password">
+                <input class="btn col s12" style="background-color:  #0d4a6b;" type="submit" name="login" value="Login">
+                <text class="left" style="margin-top: 5%; letter-spacing: 0.5px; transition: .2s ease-out;">Don't have an account? <a href="signup">Sign Up</a></text>
+            </form>
+    </div>
+</div>
