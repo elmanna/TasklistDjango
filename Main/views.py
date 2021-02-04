@@ -30,13 +30,17 @@ def dashboard(request):
         if request.method == "POST":
             if(request.POST):
                 task = request.POST['task']
-                name = request.user.username
-                form = TaskForm({'task': task, 'done': False, 'name': name})
-                if form.is_valid():
-                    messages.success(request, f"task {task} is successfully added!")
-                    form.save()
+                if(task):
+                    name = request.user.username
+                    form = TaskForm({'task': task, 'done': False, 'name': name})
+                    if form.is_valid():
+                        messages.success(request, f"task {task} is successfully added!")
+                        form.save()
+                        return redirect('/')
+                else:
+                    messages.error(request, f"please enter a name for the task")
                     return redirect('/')
-        else: 
+        else:
             user = request.user.username
             user_tasks = Tasks.objects.all().filter(name=user)
             return render(request, 'dashboard.html', {'user_tasks': user_tasks, "user_agent": request.user_agent})
@@ -75,7 +79,7 @@ def login_user(request):
         user_tasks = Tasks.objects.all().filter(name=user)
         return redirect('dashboard')
     return render(request, 'index.html', {"user_agent": request.user_agent})
-        
+
 def delete_task(request, task_id):
     task = Tasks.objects.get(pk=task_id)
     messages.success(request, f"task '{task.task}' deleted successfully!")
@@ -93,7 +97,7 @@ def update_task(request, task_id):
         return redirect('dashboard')
     else:
         task = Tasks.objects.get(pk=task_id)
-        return render(request, 'update.html', {'task': task})
+        return render(request, 'update.html', {'task': task, "user_agent": request.user_agent})
 
 def set_task(request, task_id):
     task = Tasks.objects.get(pk=task_id)
@@ -101,7 +105,7 @@ def set_task(request, task_id):
         task.done = False
         messages.warning(request, f"task '{task.task}' set as not")
     else:
-        task.done = True 
+        task.done = True
         messages.success(request, f"task '{task.task}' set as done")
     task.save()
 
