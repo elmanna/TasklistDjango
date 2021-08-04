@@ -2,6 +2,7 @@
 <title>Taskmate</title>
   <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
   <link rel="icon" href="{% static 'img/ico.ico' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="{% static 'js/materialize.min.js' %}"></script>
   <nav class="nav-wrapper">
     <div class="container">
@@ -11,12 +12,13 @@
         <li><a href="index.php"><b>Home</b></a></li>
       </ul> -->
        {% if user.is_authenticated %}
-        <text class="right" style="margin-right : 20px;">
-          <a href="{% url 'logout' %}"><b>Logout</b></a>
-        </text>
-        <text class="left" style="margin-left : 20px;">
-         <b>{{user.username}}</b>
-        </text>
+          <text class="right" style="margin-right : 0px;">
+            <a href="{% url 'logout' %}"><i class="material-icons">logout</i></a>
+          </text>
+          <text style="margin-left : 0px;">
+           <b>{{user.username}}</b>
+          </text>
+          <br>
         {% endif %}
     </div>
     </ul>

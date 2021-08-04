@@ -1,0 +1,15 @@
+<script> M.toast({html: "make sure the screen is in 'landscape mode' for better experience", classes: "materialize-red rounded", displayLength:2000}); </script>
+<div class="row" style="position: fixed; height: 75%; width: 100%; bottom: 0%;">
+    <center>
+        <div class="card col s9 z-depth-5" style="padding: 3%; border-radius: 20px;">
+            <center><h4 style="color: #0d4a6b; letter-spacing: .5px; font-size: 300%; transition: .2s ease-out;">LOGIN</h4></center>
+            <form method="POST">
+                {% csrf_token %}
+                <input class="col s12" type="text" name="username" placeholder="Username">
+                <input class="col s12" type="password" name="passwd" placeholder="Password">
+                <input class="btn col s12" style="background-color:  #0d4a6b;  font-size: 20px;" type="submit" name="login" value="Login">
+                <text class="left" style="margin-top: 5%; letter-spacing: 0.8px; font-size: 17px; transition: .2s ease-out;">Don't have an account? <a href="signup">Sign Up</a></text>
+            </form>
+        </div>
+    </center>
+</div>
