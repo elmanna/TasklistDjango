@@ -19,11 +19,12 @@ class Dashboard(View):
         
 class Login(View):
     def get(self, request):
-        # msg = {
-        #     "User": "ahmad",
-        #     "Password": "jasonDz1"
-        # }
+        msg = {
+            "User": "ahmad",
+            "Password": "jasonDz1"
+        }
         return JsonResponse({
             "User": "ahmad",
             "Password": "jasonDz1"
         })
+        # return HttpResponse(msg)
