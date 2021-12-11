@@ -1,0 +1,55 @@
+{% load static %}
+
+ <div class="row">
+    <div class="card offset-s3 col s6 z-depth-5" style="margin-top: 20px;">
+            <form method="POST" class="col s12">
+                {% csrf_token %}
+                <div class="input-field col offset-s2 s6" style="">
+                    <input type="text" id="task" name="task" placeholder="a new task">
+                </div>
+                    <button type="submit" class="btn-floating btn-large materialize-red" 
+                    style="top: 15px; left: 30px;" name="add"><img src="{% static 'img/plus.png' %}"/></button>
+            </form>
+    </div>
+</div> 
+<form method="post">
+    {% csrf_token %}
+    <div class="card col offset-s3 s9 z-depth-4" style="padding: 30px;">
+        <div class="row">
+            <table class="highlight">
+                <center><label><h4>Tasks</h4></label></center>
+                <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Set Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    {% for task in user_tasks %}
+                        {% if task.done %}
+                            <tr style='background-color: #dff0d8; boarder-color: #d0e9c6;'>
+                                <td>{{task.task}}</td>
+                                <td>Completed</td>
+                                <td><a class="btn orange" href="{% url 'set_task' task.id %}"><i class="material-icons">remove</i></a></td>
+                                <td><a class="btn" style='background-color: #ffc107;' href="{% url 'update_task' task.id %}"><i class="material-icons">edit</i></a></td>
+                                <td><a class="btn red" href="{% url 'delete_task' task.id %}"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        {% else %}
+                            <tr style='background-color: #f2dede; boarder-color: #ebcccc;'>
+                                <td>{{task.task}}</td> 
+                                <td>not Completed</td>
+                                <td><a class="btn green" href="{% url 'set_task' task.id %}"><i class="material-icons">check</i></a></td>
+                                <td><a class="btn" style='background-color: #ffc107;' href="{% url 'update_task' task.id %}"><i class="material-icons">edit</i></a></td>
+                                <td><a class="btn red" href="{% url 'delete_task' task.id %}"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>        
+    <div>
+</form>

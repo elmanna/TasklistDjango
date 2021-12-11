@@ -1,0 +1,23 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<body>
+    <main>
+        <div class="container">
+            {% if  user_agent.is_mobile %}
+                {% if not user_agent.is_tablet %}
+                    {% include 'index/mobile.html' %}
+                {% else %}
+                    {% include 'index/tablet.html' %}
+                {% endif %}
+            {% else %}
+                {% if not user_agent.is_pc %}
+                    {% include 'index/tablet.html' %}
+                {% else %}
+                    {% include 'index/pc.html' %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </main>
+</body>
+{% endblock %}
